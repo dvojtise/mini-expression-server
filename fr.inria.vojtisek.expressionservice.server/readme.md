@@ -18,4 +18,5 @@ curl -H "Content-Type: application/json" -X POST -d '{"username":"admin","pass":
 ```
 curl -H "Content-Type: application/json" -X POST -d '{"token":"*GENERATEDTOKEN*","expression": "(1+1.1)*2"}' http://localhost:8080/compute
 curl -H "Content-Type: application/json" -X POST -d '{"token":"*GENERATEDTOKEN*","expression": "1 + 1 == 2"}' http://localhost:8080/compute
+curl -H "Content-Type: application/json" -X POST -d '{"token":"*GENERATEDTOKEN*","expression": "The Ultimate Question of Life, the Universe and Everything"}' http://localhost:8080/compute
 ```

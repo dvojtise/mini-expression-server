@@ -4,6 +4,7 @@ import static spark.Spark.*;
 
 import java.security.Key;
 import java.util.HashSet;
+import java.util.stream.Stream;
 
 import com.google.gson.Gson;
 
@@ -71,6 +72,19 @@ public class MiniExpressionServer {
 		    	return new Gson()
 		 			      .toJson(new ResultResponse("invalid token."));
 		    }
+		    
+		    // check validity of expression
+		    if(compRequest.getExpression().contains("ltimate") && compRequest.getExpression().contains("uestion")) {
+		    	return new Gson()
+		  		      .toJson(new ResultResponse("42"));
+		    }
+		    Stream<Character> characters = compRequest.getExpression().chars().mapToObj(i -> (char) i);
+		    if(characters.anyMatch(c -> Character.isLetter(c))) {
+		    	String result = "did you mean  \"The Ultimate Question of Life, the Universe and Everything\" ?";
+		    	return new Gson()
+		  		      .toJson(new ResultResponse(result));
+		    }
+		    
 		    GroovyShell shell = new GroovyShell();
 		    return new Gson()
 		      .toJson(new ResultResponse(shell.evaluate(compRequest.getExpression()).toString()));
